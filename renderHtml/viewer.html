@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>本周直播安排</title>
+  <style>
+    .pic-wrapper {
+      position: relative;
+      width: 90vw;
+      height: auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .pic-item {
+      flex-grow: 1;
+      width: 1px;
+    }
+  </style>
+</head>
+
+<body>
+  <span id="dynamic">
+
+  </span>
+
+  <div class="pic-wrapper" id="picWrapper">
+  </div>
+
+  <script src="../liveSchdule.json" type=""></script>
+  <script>
+    console.log()
+    const render = () => {
+      if (window.liveSchdule) {
+        const {
+          dynamic, dynamicPic
+        } = liveSchdule
+  
+        document.getElementById('dynamic').innerText = dynamic
+        if (dynamicPic.length) {
+          const imgWrapper = document.getElementById('picWrapper')
+          const getImgElement = (src) => {
+            const img = document.createElement('img')
+            img.classList.add('pic-item')
+            img.setAttribute('src', src)
+  
+            return img
+          }
+  
+          dynamicPic.forEach(pic => {
+            const imgEle = getImgElement(pic.img_src)
+            imgWrapper.appendChild(imgEle)
+          })
+        }
+      }
+    }
+
+    setTimeout(() => {
+      render()
+    }, 200);
+
+  </script>
+</body>
+
+</html>
